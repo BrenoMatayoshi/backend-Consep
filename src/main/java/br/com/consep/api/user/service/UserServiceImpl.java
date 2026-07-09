@@ -97,4 +97,9 @@ public class UserServiceImpl implements UserService {
     return UserMapper.toSummary(userRepository.save(user));
   }
 
+  @Override
+  public User findUserByLogin(String login) {
+    return userRepository.findByLogin(login).get();
+  }
+
 }

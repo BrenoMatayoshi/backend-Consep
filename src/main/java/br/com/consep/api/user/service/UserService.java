@@ -21,4 +21,6 @@ public interface UserService {
   SummaryUser findUserProfile(Long id);
 
   SummaryUser updateUserRole(Long id, ChangeRoleUserDTO newRole);
+
+  User findUserByLogin(String login);
 }
