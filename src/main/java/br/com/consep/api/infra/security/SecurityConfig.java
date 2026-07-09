@@ -45,7 +45,7 @@ public class SecurityConfig {
     http
         .cors(corsCustomizer -> corsCustomizer.configurationSource(request -> {
           var corsConfiguration = new org.springframework.web.cors.CorsConfiguration();
-          corsConfiguration.setAllowedOrigins(java.util.List.of(cors));
+          corsConfiguration.setAllowedOrigins(java.util.List.of(cors, "consep.cloud"));
           corsConfiguration.setAllowedMethods(java.util.List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
           corsConfiguration.setAllowedHeaders(java.util.List.of("*"));
           corsConfiguration.setAllowCredentials(true);
