@@ -36,4 +36,6 @@ public interface ProjectService {
   SummaryProject updateProjectStatus(Long id, UpdateStatusProject newStatus);
 
   int countProjectByOrganizationId(Long id);
+
+  void deleteProject(Long id);
 }

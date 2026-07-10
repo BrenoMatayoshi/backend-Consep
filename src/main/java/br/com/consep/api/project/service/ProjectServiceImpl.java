@@ -1,6 +1,7 @@
 package br.com.consep.api.project.service;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -8,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.com.consep.api.dashboard.dto.ProjectDashboardDto;
 import br.com.consep.api.organization.service.OrganizationService;
@@ -133,5 +135,17 @@ public class ProjectServiceImpl implements ProjectService {
   @Override
   public int countProjectByOrganizationId(Long id) {
     return projectRepository.countProjectByOrganizationId(id);
+  }
+
+  @Override
+  @Transactional
+  public void deleteProject(Long id) {
+    if (id == null) {
+      throw new ElementNotFoundException("Projeto não encontrado");
+    }
+
+    Project project = Objects.requireNonNull(findById(id));
+    projectRepository.delete(project);
+    projectRepository.flush();
   }
 }
