@@ -13,21 +13,24 @@ public class HashBasedStrategy implements PathStrategy {
 
   private final Path root;
 
-  // O Spring vai injetar o caminho configurado. Se não houver, ele usa
-  // "/app/assets" como padrão.
   public HashBasedStrategy(@Value("${app.upload.dir:/app/assets}") String uploadDir) {
     this.root = Paths.get(uploadDir).toAbsolutePath().normalize();
   }
 
   @Override
   public Path resolve(String sha256) throws IOException {
+    Path filePath = resolveForDeletion(sha256);
+
+    Files.createDirectories(filePath.getParent());
+
+    return filePath;
+  }
+
+  @Override
+  public Path resolveForDeletion(String sha256) {
     String dir1 = sha256.substring(0, 2);
     String dir2 = sha256.substring(2, 4);
 
-    Path directory = root.resolve(dir1).resolve(dir2);
-
-    Files.createDirectories(directory);
-
-    return directory.resolve(sha256 + ".pdf");
+    return root.resolve(dir1).resolve(dir2).resolve(sha256 + ".pdf");
   }
 }

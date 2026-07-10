@@ -11,6 +11,7 @@ import br.com.consep.api.publicNotice.entity.PublicNotice;
 import br.com.consep.api.shared.enums.ProjectStatus;
 import br.com.consep.api.toPay.entity.ToPay;
 import jakarta.persistence.Column;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -45,7 +46,7 @@ public class Project extends BaseModel {
   @JoinColumn(name = "public_notice_id", referencedColumnName = "id")
   private PublicNotice notice;
 
-  @OneToMany(mappedBy = "project")
+  @OneToMany(mappedBy = "project", cascade = CascadeType.REMOVE, orphanRemoval = true)
   private List<ToPay> toPay;
 
   @Column(name = "status")

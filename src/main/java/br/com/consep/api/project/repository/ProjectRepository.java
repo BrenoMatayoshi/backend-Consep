@@ -3,12 +3,10 @@ package br.com.consep.api.project.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.stereotype.Repository;
 
 import br.com.consep.api.dashboard.dto.ProjectDashboardDto;
 import br.com.consep.api.project.entity.Project;
 
-@Repository
 public interface ProjectRepository extends JpaRepository<Project, Long>, JpaSpecificationExecutor<Project> {
     @Query("""
             SELECT new br.com.consep.api.dashboard.dto.ProjectDashboardDto(
@@ -34,4 +32,6 @@ public interface ProjectRepository extends JpaRepository<Project, Long>, JpaSpec
     ProjectDashboardDto findProjectDashboard();
 
     int countProjectByOrganizationId(Long id);
+
+    void deleteByOrganizationId(Long organizationId);
 }

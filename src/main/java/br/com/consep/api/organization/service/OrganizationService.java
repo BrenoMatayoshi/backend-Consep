@@ -25,4 +25,6 @@ public interface OrganizationService {
   DetailedOrganization getOrganization(Long id);
 
   List<OrganizationDashboardDto> findLimited(int limit);
+
+  void deleteOrganization(Long id);
 }

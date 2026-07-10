@@ -1,8 +1,7 @@
 package br.com.consep.api.base;
 
-import java.util.List;
-
 import br.com.consep.api.document.entity.Document;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -25,6 +24,6 @@ public abstract class BaseModel {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @OneToOne(mappedBy = "entity")
+  @OneToOne(mappedBy = "entity", cascade = CascadeType.REMOVE, orphanRemoval = true)
   private Document document;
 }

@@ -5,4 +5,6 @@ import java.nio.file.Path;
 
 public interface PathStrategy {
   Path resolve(String sha256) throws IOException;
+
+  Path resolveForDeletion(String sha256);
 }

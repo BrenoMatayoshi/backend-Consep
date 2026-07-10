@@ -10,6 +10,7 @@ import br.com.consep.api.project.entity.Project;
 import br.com.consep.api.shared.enums.ToPayStatus;
 import br.com.consep.api.shared.enums.TypePayment;
 import jakarta.persistence.Column;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -55,7 +56,7 @@ public class ToPay extends BaseModel {
   @Enumerated(EnumType.STRING)
   private ToPayStatus status;
 
-  @OneToMany(mappedBy = "toPay")
+  @OneToMany(mappedBy = "toPay", cascade = CascadeType.REMOVE, orphanRemoval = true)
   private List<Payment> payment;
 
   @ManyToOne(optional = false)

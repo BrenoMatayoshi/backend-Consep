@@ -36,13 +36,13 @@ public class Organization {
   @Column(name = "abbreviation")
   private String abbreviation;
 
-  @OneToMany(mappedBy = "organization", cascade = CascadeType.ALL)
+  @OneToMany(mappedBy = "organization", cascade = CascadeType.REMOVE, orphanRemoval = true)
   private List<PublicNotice> notices;
 
-  @OneToMany(mappedBy = "organization", cascade = CascadeType.ALL)
+  @OneToMany(mappedBy = "organization", cascade = CascadeType.REMOVE, orphanRemoval = true)
   private List<Project> projects;
 
-  @OneToMany(mappedBy = "organization", cascade = CascadeType.ALL)
+  @OneToMany(mappedBy = "organization", cascade = CascadeType.REMOVE, orphanRemoval = true)
   private List<User> users;
 
   @Formula("(SELECT COUNT(u.id) FROM users u WHERE u.organization_id = id)")
