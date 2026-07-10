@@ -1,5 +1,7 @@
 package br.com.consep.api.organization.mapper;
 
+import java.util.Optional;
+
 import br.com.consep.api.organization.dto.DetailedOrganization;
 import br.com.consep.api.organization.dto.RequestOrganization;
 import br.com.consep.api.organization.dto.SummaryOrganization;
@@ -32,10 +34,9 @@ public class OrganizationMapper {
     response.setId(entity.getId());
     response.setAbbreviation(entity.getAbbreviation());
     response.setName(entity.getName());
-
-    response.setNoticesCount(entity.getNoticesCount());
-    response.setProjectsCount(entity.getProjectsCount());
-    response.setUsersCount(entity.getUsersCount());
+    response.setNoticesCount(Optional.ofNullable(entity.getNoticesCount()).orElse(0));
+    response.setProjectsCount(Optional.ofNullable(entity.getProjectsCount()).orElse(0));
+    response.setUsersCount(Optional.ofNullable(entity.getUsersCount()).orElse(0));
 
     return response;
   }

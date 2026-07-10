@@ -55,7 +55,12 @@ public class OrganizationServiceImpl implements OrganizationService {
       return null;
     }
 
-    return OrganizationMapper.toSummary(organizationRepository.save(organization));
+    Organization saved = organizationRepository.save(organization);
+
+    saved = organizationRepository.findById(saved.getId())
+        .orElseThrow();
+
+    return OrganizationMapper.toSummary(saved);
   }
 
   @Override
