@@ -148,4 +148,15 @@ public class ProjectServiceImpl implements ProjectService {
     projectRepository.delete(project);
     projectRepository.flush();
   }
+
+  @Override
+  @Transactional
+  public SummaryProject updateProject(Long id, RequestProject request) {
+    Project project = findById(id);
+
+    project.setName(request.getName());
+    project.setValue(request.getValue());
+
+    return ProjectMapper.toSummary(project);
+  }
 }

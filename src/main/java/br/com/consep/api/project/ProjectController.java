@@ -64,7 +64,7 @@ public class ProjectController {
     return ResponseEntity.ok().body(projectService.getProject(id));
   }
 
-  @PutMapping("/{id}")
+  @PutMapping("/{id}/status")
   @PreAuthorize("hasAnyRole('ADMIN')")
   public ResponseEntity<SummaryProject> updateProjectStatus(@PathVariable Long id,
       @Valid @RequestBody UpdateStatusProject updateStatusProject) {
@@ -74,5 +74,12 @@ public class ProjectController {
   @DeleteMapping("/{id}")
   public void deleteProject(@PathVariable Long id) {
     projectService.deleteProject(id);
+  }
+
+  @PutMapping("/{id}")
+  public ResponseEntity<SummaryProject> updateProject(@PathVariable Long id,
+      @RequestBody @Valid RequestProject project) {
+
+    return ResponseEntity.ok(projectService.updateProject(id, project));
   }
 }

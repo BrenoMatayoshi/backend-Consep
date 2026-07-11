@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PutMapping;
 
 @RestController
 @RequiredArgsConstructor
@@ -60,5 +61,11 @@ public class OrganizationController {
   @DeleteMapping("/{id}")
   public void deleteOrganization(@PathVariable Long id) {
     organizationService.deleteOrganization(id);
+  }
+
+  @PutMapping("/{id}")
+  public ResponseEntity<SummaryOrganization> updateOrganization(@PathVariable Long id,
+      @RequestBody @Valid RequestOrganization request) {
+    return ResponseEntity.ok(organizationService.updateOrganization(id, request));
   }
 }

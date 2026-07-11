@@ -38,4 +38,6 @@ public interface ProjectService {
   int countProjectByOrganizationId(Long id);
 
   void deleteProject(Long id);
+
+  SummaryProject updateProject(Long id, RequestProject request);
 }

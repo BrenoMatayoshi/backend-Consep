@@ -107,4 +107,16 @@ public class OrganizationServiceImpl implements OrganizationService {
     userRepository.deleteByOrganizationId(id);
     organizationRepository.deleteById(id);
   }
+
+  @Override
+  @Transactional
+  public SummaryOrganization updateOrganization(Long id, RequestOrganization request) {
+
+    Organization organization = findById(id);
+
+    organization.setName(request.getName());
+    organization.setAbbreviation(request.getAbbreviation());
+
+    return OrganizationMapper.toSummary(organization);
+  }
 }
