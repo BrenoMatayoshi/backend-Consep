@@ -57,6 +57,7 @@ public class ProjectMapper {
     response.setStatus(entity.getProjectStatus());
     response.setValue(entity.getValue());
     response.setNoticeNumber(entity.getNotice().getNumber());
+    response.setDocument(DocumentMapper.toSummary(entity.getDocument()));
 
     return response;
   }

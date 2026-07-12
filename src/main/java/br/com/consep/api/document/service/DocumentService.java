@@ -20,4 +20,6 @@ public interface DocumentService {
   SummaryDocument getNameAndId(Long id);
 
   Document findById(Long id);
+
+  void deleteDocument(Long id);
 }

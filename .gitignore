@@ -39,3 +39,5 @@ assets/
 certbot/
 
 nginx/
+
+.env

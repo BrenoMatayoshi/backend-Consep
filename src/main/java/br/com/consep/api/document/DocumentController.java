@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @RestController
@@ -67,6 +68,12 @@ public class DocumentController {
         // .contentLength(Files.size(path))
         .body(documentService.getResource(id, document));
 
+  }
+
+  @DeleteMapping("{id}")
+  public ResponseEntity<?> deleteDocument(@PathVariable Long id) {
+    documentService.deleteDocument(id);
+    return ResponseEntity.ok().build();
   }
 
 }

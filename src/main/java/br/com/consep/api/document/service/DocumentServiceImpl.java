@@ -6,6 +6,7 @@ import java.security.NoSuchAlgorithmException;
 
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.com.consep.api.base.BaseModel;
 import br.com.consep.api.base.service.BaseModelService;
@@ -85,5 +86,20 @@ public class DocumentServiceImpl implements DocumentService {
         .orElseThrow(() -> new ElementNotFoundException("Documento não encontrado.")));
 
     return summary;
+  }
+
+  @Override
+  @Transactional
+  public void deleteDocument(Long id) {
+    Document document = findByBaseModelId(id);
+
+    // Completely break the bidirectional loop
+    if (document.getEntity() != null) {
+      document.getEntity().setDocument(null);
+      ;
+      document.setEntity(null);
+    }
+
+    documentRepository.delete(document);
   }
 }
