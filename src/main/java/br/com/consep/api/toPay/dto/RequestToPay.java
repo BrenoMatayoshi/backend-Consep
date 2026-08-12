@@ -36,7 +36,7 @@ public class RequestToPay {
   // private Date paidAt;
 
   @NotNull(message = "A data de vencimento não pode ser nula")
-  @FutureOrPresent(message = "A data não pode estar no passado")
+  // @FutureOrPresent(message = "A data não pode estar no passado")
   private LocalDate dueDate;
 
   // private Date scheduledAt;
