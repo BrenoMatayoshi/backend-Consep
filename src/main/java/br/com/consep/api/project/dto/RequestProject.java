@@ -25,6 +25,8 @@ public class RequestProject {
   @Digits(integer = 10, fraction = 2, message = "O valor deve ter no máximo 10 dígitos e 2 casas decimais")
   private BigDecimal value;
 
+  private Long organizationId;
+
   // @JsonIgnore
   // private Organization organization;
 

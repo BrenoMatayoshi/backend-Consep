@@ -32,4 +32,6 @@ public interface ToPayService {
       ToPayStatus status,
       String sortBy,
       String sortOrder);
+
+  void deleteToPay(Long id);
 }

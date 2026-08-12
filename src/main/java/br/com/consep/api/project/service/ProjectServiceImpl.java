@@ -3,6 +3,7 @@ package br.com.consep.api.project.service;
 import java.math.BigDecimal;
 import java.util.Objects;
 
+import br.com.consep.api.organization.entity.Organization;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -151,8 +152,13 @@ public class ProjectServiceImpl implements ProjectService {
 
   @Override
   @Transactional
-  public SummaryProject updateProject(Long id, RequestProject request) {
+  public SummaryProject updateProject(Long id,RequestProject request) {
     Project project = findById(id);
+
+    if (!project.getOrganization().getId().equals(request.getOrganizationId())) {
+      Organization organization = organizationService.findById(request.getOrganizationId());
+      project.setOrganization(organization);
+    }
 
     project.setName(request.getName());
     project.setValue(request.getValue());

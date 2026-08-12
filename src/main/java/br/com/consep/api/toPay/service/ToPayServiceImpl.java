@@ -3,6 +3,7 @@ package br.com.consep.api.toPay.service;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -25,6 +26,7 @@ import br.com.consep.api.toPay.mapper.ToPayMapper;
 import br.com.consep.api.toPay.repository.ToPayRepository;
 import br.com.consep.api.toPay.specification.ToPaySpecification;
 import lombok.RequiredArgsConstructor;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -121,5 +123,18 @@ public class ToPayServiceImpl implements ToPayService {
       case "paymentSlip", "paymentProof" -> "payment.typeDocument";
       default -> sortBy;
     };
+  }
+
+  @Override
+  @Transactional
+  public void deleteToPay(Long id) {
+    if (id == null) {
+      throw new ElementNotFoundException("Boleto não encontrado");
+    }
+
+    ToPay toPay = Objects.requireNonNull(findById(id));
+
+    toPayRepository.delete(toPay);
+    toPayRepository.flush();
   }
 }

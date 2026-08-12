@@ -1,8 +1,6 @@
 package br.com.consep.api.toPay;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import br.com.consep.api.shared.PathConstant;
 import br.com.consep.api.shared.dto.PagedResponseDTO;
@@ -19,14 +17,8 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.PutMapping;
 
 @RestController
 @RequiredArgsConstructor
@@ -70,4 +62,8 @@ public class ToPayController {
         .body(toPayService.findAll(page, limit, value, dueDate, status, sortBy, sortOrder));
   }
 
+  @DeleteMapping("/{id}")
+  public void deleteToPay(@PathVariable Long id) {
+    toPayService.deleteToPay(id);
+  }
 }
